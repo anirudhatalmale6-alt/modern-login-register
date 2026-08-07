@@ -15,15 +15,25 @@
 /* 1. VARIABLES DE TEMA — Cambia estos valores para reajustar la marca         */
 /* -------------------------------------------------------------------------- */
 :root {
-  /* Paleta principal (degradado morado/índigo moderno) */
-  --color-primary: #6a11cb;
-  --color-primary-2: #2575fc;
-  --gradient-brand: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  /* ---- Paleta de marca ROCKET HUB LOGISTICS (azul marino + naranja) ---- */
+  --color-navy: #12294a;      /* azul marino oscuro del logo */
+  --color-navy-2: #1e4272;    /* azul marino mas claro (degradado) */
+  --color-orange: #f6821f;    /* naranja del logo */
+  --color-orange-2: #ff9d3a;  /* naranja mas claro (degradado) */
+
+  /* Degradado del panel de bienvenida (azul marino) */
+  --gradient-brand: linear-gradient(135deg, #12294a 0%, #1e4272 100%);
+  /* Degradado de acento para botones principales (naranja) */
+  --gradient-accent: linear-gradient(135deg, #f6821f 0%, #ff9d3a 100%);
+
+  /* Colores de foco / enlaces (naranja de marca) */
+  --color-primary: var(--color-orange);
+  --color-primary-2: var(--color-orange);
 
   /* Neutros */
   --color-bg: #eef1f6;
   --color-surface: #ffffff;
-  --color-text: #2b2b3a;
+  --color-text: #12294a;
   --color-muted: #8a8f9c;
   --color-border: #e3e6ee;
   --color-field: #f2f4f9;
@@ -34,8 +44,8 @@
   /* Radios y sombras */
   --radius-card: 18px;
   --radius-field: 10px;
-  --shadow-card: 0 24px 60px rgba(28, 32, 66, 0.18);
-  --shadow-btn: 0 10px 24px rgba(37, 117, 252, 0.35);
+  --shadow-card: 0 24px 60px rgba(18, 41, 74, 0.20);
+  --shadow-btn: 0 10px 24px rgba(246, 130, 31, 0.38);
 
   /* Transición base de la animación deslizante */
   --ease: 0.6s cubic-bezier(0.68, -0.35, 0.27, 1.35);
@@ -61,8 +71,8 @@ body {
   padding: 20px;
   /* Fondo sutil con degradado de marca desenfocado */
   background-image:
-    radial-gradient(circle at 15% 20%, rgba(106, 17, 203, 0.12), transparent 40%),
-    radial-gradient(circle at 85% 80%, rgba(37, 117, 252, 0.12), transparent 40%);
+    radial-gradient(circle at 15% 20%, rgba(18, 41, 74, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(246, 130, 31, 0.12), transparent 40%);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -139,8 +149,8 @@ body {
 }
 
 .brand-logo img {
-  max-height: 46px;
-  max-width: 160px;
+  max-height: 58px;
+  max-width: 210px;
   object-fit: contain;
 }
 
@@ -314,15 +324,15 @@ body {
   transform: scale(0.97);
 }
 
-/* Botón sólido (con degradado de marca) */
+/* Botón sólido (con degradado de acento naranja de la marca) */
 .btn--solid {
-  background: var(--gradient-brand);
+  background: var(--gradient-accent);
   color: #fff;
   box-shadow: var(--shadow-btn);
 }
 
 .btn--solid:hover {
-  box-shadow: 0 14px 30px rgba(37, 117, 252, 0.45);
+  box-shadow: 0 14px 30px rgba(246, 130, 31, 0.48);
 }
 
 /* Botón fantasma (transparente sobre el overlay) */
