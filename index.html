@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Módulo de Autenticación — Login & Registro
+  ----------------------------------------------------------------------------
+  Diseño moderno de dos paneles con animación deslizante (sliding panel).
+  Al pulsar "Registrarse" el panel de bienvenida se desliza y muestra el
+  formulario de creación de cuenta; al pulsar "Iniciar Sesión" vuelve al login.
+
+  Estructura del proyecto:
+    index.html   -> Marcado (este archivo)
+    css/style.css -> Estilos, tema de colores (variables CSS) y animaciones
+    js/main.js    -> Lógica de la interfaz (toggle de paneles + validación)
+    assets/       -> Coloca aquí tu logo (logo.png / logo.svg)
+
+  Personalización rápida:
+    - Colores de marca: edita las variables en :root dentro de css/style.css
+    - Logo: reemplaza el placeholder .brand-logo por tu imagen (ver README)
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión / Registro</title>
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Iconos (Font Awesome) para los botones de redes sociales -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- Tipografía moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <!--
+    Contenedor principal.
+    La clase "right-panel-active" se añade/quita por JavaScript para disparar
+    la animación deslizante entre Login y Registro.
+  -->
+  <div class="container" id="container">
+
+    <!-- ================= FORMULARIO DE REGISTRO ================= -->
+    <div class="form-container sign-up-container">
+      <form class="auth-form" id="signUpForm" novalidate>
+        <!-- Placeholder del logo: reemplaza por tu imagen en assets/ -->
+        <div class="brand-logo" aria-label="Logo">
+          <!-- Coloca tu logo en assets/logo.svg (o .png y cambia la ruta).
+               Mientras no exista, se muestra el recuadro "TU LOGO". -->
+          <img src="assets/logo.svg" alt="Logo"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+          <span class="brand-logo__fallback" style="display:none;">TU&nbsp;LOGO</span>
+        </div>
+
+        <h1 class="form-title">Crear Cuenta</h1>
+
+        <!-- Registro con redes sociales -->
+        <div class="social-container">
+          <a href="#" class="social-btn" aria-label="Registrarse con Google" title="Google">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-btn" aria-label="Registrarse con Facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-btn" aria-label="Registrarse con LinkedIn" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+
+        <span class="separator">O</span>
+
+        <!-- Campos del formulario de registro -->
+        <div class="field-row">
+          <div class="input-group">
+            <input type="text" id="su-nombres" name="nombres" placeholder="Nombres" required />
+            <small class="error-msg"></small>
+          </div>
+          <div class="input-group">
+            <input type="text" id="su-apellidos" name="apellidos" placeholder="Apellidos" required />
+            <small class="error-msg"></small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="su-ciudad" name="ciudad" placeholder="Ciudad" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <input type="tel" id="su-telefono" name="telefono" placeholder="Teléfono" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="su-email" name="email" placeholder="Correo Electrónico" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="su-password" name="password" placeholder="Contraseña" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <!-- Campo Fecha de Nacimiento con etiqueta flotante (por el tipo date) -->
+        <div class="input-group input-group--date">
+          <label for="su-fecha">Fecha de Nacimiento</label>
+          <input type="date" id="su-fecha" name="fechaNacimiento" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <button type="submit" class="btn btn--solid">Registrarse</button>
+      </form>
+    </div>
+
+    <!-- ================= FORMULARIO DE LOGIN ================= -->
+    <div class="form-container sign-in-container">
+      <form class="auth-form" id="signInForm" novalidate>
+        <!-- Placeholder del logo -->
+        <div class="brand-logo" aria-label="Logo">
+          <!-- Coloca tu logo en assets/logo.svg (o .png y cambia la ruta).
+               Mientras no exista, se muestra el recuadro "TU LOGO". -->
+          <img src="assets/logo.svg" alt="Logo"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+          <span class="brand-logo__fallback" style="display:none;">TU&nbsp;LOGO</span>
+        </div>
+
+        <h1 class="form-title">Sign In</h1>
+
+        <!-- Login con redes sociales -->
+        <div class="social-container">
+          <a href="#" class="social-btn" aria-label="Iniciar sesión con Google" title="Google">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-btn" aria-label="Iniciar sesión con Facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-btn" aria-label="Iniciar sesión con LinkedIn" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+
+        <span class="separator">O</span>
+
+        <div class="input-group">
+          <input type="email" id="si-email" name="email" placeholder="Correo Electrónico" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="si-password" name="password" placeholder="Contraseña" required />
+          <small class="error-msg"></small>
+        </div>
+
+        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+
+        <button type="submit" class="btn btn--solid">Iniciar Sesión</button>
+      </form>
+    </div>
+
+    <!-- ================= PANEL DESLIZANTE (OVERLAY) ================= -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <!-- Overlay que se ve durante el Registro (invita a iniciar sesión) -->
+        <div class="overlay-panel overlay-left">
+          <h1>¡Bienvenido de nuevo!</h1>
+          <p>¿Ya tienes una cuenta? Inicia sesión para continuar donde lo dejaste.</p>
+          <button type="button" class="btn btn--ghost" id="signInBtn">Iniciar Sesión</button>
+        </div>
+
+        <!-- Overlay que se ve durante el Login (invita a registrarse) -->
+        <div class="overlay-panel overlay-right">
+          <h1>Hola amigo</h1>
+          <p>
+            ¿Aún no estás registrado? Realiza tu registro ahora.
+            Es rápido, fácil y completamente gratis.
+          </p>
+          <button type="button" class="btn btn--ghost" id="signUpBtn">Registrarse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lógica de la interfaz -->
+  <script src="js/main.js"></script>
+</body>
+</html>
